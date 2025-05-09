@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <script defer src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+</head>
+<body>
+    <%-  include ('header', { user: user }) %>
+    <main class="p-4 bg-gray-100 dark:bg-gray-800 w-screen">
+      <section class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white py-24 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl font-bold mb-6">
+            Add and Manage Custom Shopify Sections with Ease
+          </h1>
+          <p class="text-lg md:text-xl mb-8 text-gray-700 dark:text-gray-300">
+            Launch your Shopify store faster with pre-built sections and powerful project management tools.
+          </p>
+          <div class="flex justify-center gap-4 flex-wrap">
+            <% if(user) { %>
+            <a href="/user/projects" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition">
+              Get Started
+            </a>
+            <% } else { %>
+              <a href="/user/register" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition">
+                Get Started
+              </a>
+            <% } %>
+            <a href="/user/login" class="px-6 py-3 border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg font-medium transition">
+              Already have an account? <span class="underline">Login here</span>
+            </a>
+          </div>
+        </div>
+      </section> 
+
+      <section class="bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white py-20 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-bold mb-16">
+            Simple 5-Step Workflow
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
+            
+            <!-- Step 1 -->
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-full mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 dark:text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 class="font-semibold text-lg mb-1">Sign Up & Login</h3>
+              <p class="text-gray-700 dark:text-gray-300">Create your free account and log in to your dashboard.</p>
+            </div>
+      
+            <!-- Step 2 -->
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-full mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 dark:text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+              </div>
+              <h3 class="font-semibold text-lg mb-1">Add Your Store</h3>
+              <p class="text-gray-700 dark:text-gray-300">Connect your Shopify store with app credentials and theme ID.</p>
+            </div>
+      
+            <!-- Step 3 -->
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-full mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 dark:text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                </svg>
+              </div>
+              <h3 class="font-semibold text-lg mb-1">Choose a Plan</h3>
+              <p class="text-gray-700 dark:text-gray-300">Pick a monthly or yearly subscription that fits your needs.</p>
+            </div>
+      
+            <!-- Step 4 -->
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-full mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 dark:text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6a3 3 0 013-3h4" />
+                </svg>
+              </div>
+              <h3 class="font-semibold text-lg mb-1">Explore Sections</h3>
+              <p class="text-gray-700 dark:text-gray-300">Browse our collection of pre-built, customizable sections.</p>
+            </div>
+      
+            <!-- Step 5 -->
+            <div class="flex flex-col items-center text-center">
+              <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-full mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 dark:text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h11M9 21V3" />
+                </svg>
+              </div>
+              <h3 class="font-semibold text-lg mb-1">Implement Easily</h3>
+              <p class="text-gray-700 dark:text-gray-300">Use the sections directly in your Shopify theme with ease.</p>
+            </div>
+      
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white py-20 px-6" id="choose-us">
+        <div class="max-w-6xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-bold mb-16">
+            Why Choose Us?
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
+            
+            <!-- Feature 1 -->
+            <div class="flex items-start gap-4">
+              <div class="bg-blue-100 dark:bg-blue-900 p-3 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6a3 3 0 013-3h4" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg mb-1">100+ Ready-to-use Shopify sections</h3>
+                <p class="text-gray-700 dark:text-gray-300">Choose from a large collection of professionally designed sections.</p>
+              </div>
+            </div>
+      
+            <!-- Feature 2 -->
+            <div class="flex items-start gap-4">
+              <div class="bg-blue-100 dark:bg-blue-900 p-3 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg mb-1">Seamless theme integration</h3>
+                <p class="text-gray-700 dark:text-gray-300">Easily integrate sections into any Shopify theme with minimal setup.</p>
+              </div>
+            </div>
+      
+            <!-- Feature 3 -->
+            <div class="flex items-start gap-4">
+              <div class="bg-blue-100 dark:bg-blue-900 p-3 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg mb-1">Easy-to-manage projects dashboard</h3>
+                <p class="text-gray-700 dark:text-gray-300">Organize your stores and projects from a centralized dashboard.</p>
+              </div>
+            </div>
+      
+            <!-- Feature 4 -->
+            <div class="flex items-start gap-4">
+              <div class="bg-blue-100 dark:bg-blue-900 p-3 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 1.105-.895 2-2 2s-2-.895-2-2 .895-2 2-2 2 .895 2 2zm0 0v6m0 0h4m-4 0H8" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg mb-1">Secure access via custom app</h3>
+                <p class="text-gray-700 dark:text-gray-300">Your data and access remain secure with Shopify app permissions.</p>
+              </div>
+            </div>
+      
+            <!-- Feature 5 -->
+            <div class="flex items-start gap-4 md:col-span-2 justify-center">
+              <div class="bg-blue-100 dark:bg-blue-900 p-3 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg mb-1">Regular updates and new sections</h3>
+                <p class="text-gray-700 dark:text-gray-300">We continuously improve and expand our section library.</p>
+              </div>
+            </div>
+      
+          </div>
+        </div>
+      </section>
+
+      <section class="min-h-screen flex items-center justify-center px-4 py-12 bg-gray-100 dark:bg-gray-900">
+        <div class="max-w-4xl w-full bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-10">
+          <h1 class="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">Choose Your Plan</h1>
+      
+          <form action="/subscription/create-subscription" method="POST">
+            <div class="grid md:grid-cols-2 gap-8 mb-10">
+              <!-- Monthly Plan -->
+              <label for="monthly" class="relative block bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-xl p-8 cursor-pointer hover:border-blue-500 peer-checked:border-blue-600 transition-all">
+                <input type="radio" id="monthly" name="planType" value="monthly" class="sr-only peer" checked />
+                <div class="flex flex-col items-center text-center space-y-2">
+                  <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Monthly</h2>
+                  <p class="text-3xl font-bold text-blue-600 dark:text-blue-400">₹499</p>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">per month</p>
+                </div>
+                <div class="absolute top-4 right-4 hidden peer-checked:block">
+                  <span class="text-xs bg-blue-600 text-white rounded-full px-3 py-1">Selected</span>
+                </div>
+              </label>
+      
+              <!-- Yearly Plan -->
+              <label for="yearly" class="relative block bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-xl p-8 cursor-pointer hover:border-blue-500 peer-checked:border-blue-600 transition-all">
+                <input type="radio" id="yearly" name="planType" value="yearly" class="sr-only peer" />
+                <div class="flex flex-col items-center text-center space-y-2">
+                  <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Yearly</h2>
+                  <p class="text-3xl font-bold text-blue-600 dark:text-blue-400">₹4800</p>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">billed yearly</p>
+                  <span class="mt-2 text-xs bg-green-100 text-green-600 dark:bg-green-700 dark:text-green-100 rounded-full px-3 py-1">
+                    Save 20%
+                  </span>
+                </div>
+                <div class="absolute top-4 right-4 hidden peer-checked:block">
+                  <span class="text-xs bg-blue-600 text-white rounded-full px-3 py-1">Selected</span>
+                </div>
+              </label>
+            </div>
+            
+            <% if(user) { %>
+              <button type="submit"
+                class="cursor-pointer w-full py-4 text-lg font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all">
+                Subscribe Now
+              </button>
+            <% } else { %>
+              <a href="/user/login" class="cursor-pointer w-full py-4 text-lg font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all" style="display: block; width: max-content; margin: auto; padding-inline: 35px;">
+                Login to Subscribe
+              </a>
+            <% } %>
+          </form>
+        </div>
+      </section>
+
+
+      <section class="bg-gray-50 dark:bg-gray-900 py-20 px-6 text-gray-900 dark:text-white">
+        <div class="max-w-6xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-bold mb-12">Trusted by Shopify Store Owners</h2>
+      
+          <!-- Testimonials Grid -->
+          <div class="grid gap-8 md:grid-cols-3">
+            <!-- Testimonial 1 -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+              <p class="text-sm italic mb-4 text-gray-700 dark:text-gray-300">
+                "This app made it super easy to manage and launch new sections. Saved me hours of dev time!"
+              </p>
+              <div class="flex items-center gap-3">
+                <div class="text-left">
+                  <p class="font-semibold">Rohit S.</p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">Store Owner, India</p>
+                </div>
+              </div>
+            </div>
+      
+            <!-- Testimonial 2 -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+              <p class="text-sm italic mb-4 text-gray-700 dark:text-gray-300">
+                "A very professional tool for Shopify section creation. Highly recommended for freelancers and agencies."
+              </p>
+              <div class="flex items-center gap-3">
+                <div class="text-left">
+                  <p class="font-semibold">Ayesha M.</p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">Freelancer, UAE</p>
+                </div>
+              </div>
+            </div>
+      
+            <!-- Testimonial 3 -->
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+              <p class="text-sm italic mb-4 text-gray-700 dark:text-gray-300">
+                "Simple, effective, and affordable. The section previews made it very easy to choose what fits best."
+              </p>
+              <div class="flex items-center gap-3">
+                <div class="text-left">
+                  <p class="font-semibold">Jason L.</p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">Dropshipper, USA</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+        </div>
+      </section> 
+      
+      
+
+    </main>
+    <%- include ('footer') %>
+</body>
+</html>

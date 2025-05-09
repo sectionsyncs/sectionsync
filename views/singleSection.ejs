@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= section.title %></title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <script defer src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <link rel="stylesheet" href="/css/lightbox.min.css">
+    <script src="/js/lightbox-plus-jquery.min.js" defer></script>
+    <script src="/js/lightbox.min.js" defer></script>
+</head>
+<body>
+    <%-  include ('header', { user: user }) %>
+    <main class="p-4 max-w-screen-xl mx-auto">
+        <style>
+            .header-area {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 20px 0;
+            }
+        </style>
+        <div class="header-area">
+            <h1><%= section.title %></h1>
+            <button onclick="add_section('<%= projectId %>', '<%= sectionId %>')" class="mt-2 cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Add Section
+            </button>
+        </div>
+        <img src="<%= section.image %>" alt="<%= section.title %>" >
+    </main>
+      <!-- Tab Toggle Script -->
+        <script>
+            async function add_section(project, section) {
+                //console.log(project, section);
+                fetch('/api/section-opration/add', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        projectID: project,
+                        sectionID: section
+                    })
+                }).then(resposne => resposne.json())
+                .then(data => console.log(data))
+                .catch(error => { console.log(error) })
+            }
+        </script>
+    <%- include ('footer') %>
+</body>
+</html>

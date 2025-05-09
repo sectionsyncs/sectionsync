@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+  <script defer src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+
+  <%- include('header', { user: user }) %>
+
+  <section class="max-w-6xl mx-auto px-4 py-16">
+    <h1 class="text-4xl font-bold text-center mb-10">About Us</h1>
+
+    <div class="space-y-10 text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+
+      <div class="text-center">
+        <p>Welcome to <strong>SectionSync™</strong> — your trusted partner for building, managing, and scaling beautiful Shopify stores with custom sections and easy project management tools.</p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-semibold mb-4">Our Mission</h2>
+        <p>Our mission is to make Shopify development simple and accessible. Whether you are launching a new store or upgrading an existing one, we provide ready-to-use sections and powerful project management features to speed up your workflow and ensure high-quality results.</p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-semibold mb-4">What We Offer</h2>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>Over 100+ pre-made Shopify sections for rapid development.</li>
+          <li>Seamless integration with your existing Shopify themes.</li>
+          <li>A centralized dashboard to manage your projects efficiently.</li>
+          <li>Secure access and updates through your custom app.</li>
+          <li>Continuous improvements and new features based on user feedback.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-semibold mb-4">Why Choose Us?</h2>
+        <p>We are passionate about Shopify and understand the challenges store owners and developers face. Our platform is built by experts who want to make a real difference in how fast and efficiently you can customize your online store.</p>
+      </div>
+
+      <div class="text-center">
+        <h2 class="text-2xl font-semibold mb-4">Join Us on This Journey</h2>
+        <p>Whether you are a solo entrepreneur, a growing brand, or a professional developer, we are here to support your journey. Let’s build better Shopify stores together!</p>
+      </div>
+
+    </div>
+  </section>
+
+  <%- include('footer') %>
+
+</body>
+</html>
