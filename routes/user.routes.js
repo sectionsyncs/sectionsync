@@ -310,7 +310,7 @@ router.post('/deactivate-plan',auth , async (req, res) => {
 });
 
 //email varification routes
-router.post('/send-verification-email', async (req, res) => {
+router.post('/send-verification-email', auth, async (req, res) => {
     try {
 
       const user = await userModel.findById(req.user.userID);
