@@ -330,9 +330,10 @@ router.post('/send-verification-email', auth, async (req, res) => {
       });
   
       await transporter.sendMail({
-        from: `"Support" <${process.env.EMAIL_ID}>`,
+        from: `"Section Sync Support" <${process.env.EMAIL_ID}>`,
         to: user.email,
-        subject: 'Verify Your Email',
+        subject: 'Please Verify Your Email',
+        text: 'Please verify your email: ' + verifyUrl, // plain text
         html: `
           <p>Hello ${user.username},</p>
           <p>Click below to verify your email:</p>
@@ -340,7 +341,7 @@ router.post('/send-verification-email', auth, async (req, res) => {
         `
       });
   
-      res.redirect('/account');
+      res.redirect('/user/account');
     } catch (error) {
       console.error('Email send error:', error);
       res.status(500).send('Failed to send verification email.');
@@ -356,10 +357,10 @@ router.get('/verify-email', async (req, res) => {
       if (!user) return res.status(400).send('Invalid token');
   
       user.email_verified = true;
-      user.email_verification_token = undefined;
+      user.email_verification_token = '';
       await user.save();
   
-      res.redirect('/account');
+      res.redirect('/user/account');
     } catch (error) {
       res.status(500).send('Verification failed');
     }
