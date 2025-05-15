@@ -59,7 +59,11 @@ const userSchema = new mongoose.Schema({
       default: false,
     },
     email_verified: { type: Boolean, default: false },
-    email_verification_token: String
+    email_verification_token: {
+      type: String,
+      trim: true,
+      default: ''
+    }
 });
 
 const user = mongoose.model('user', userSchema);
