@@ -55,7 +55,30 @@ router.post("/register",
             email,
             password: hashPassword
         });
-        res.json(newUser);
+
+        const token = jwt.sign({ 
+                userID: newUser._id,
+                email: newUser.email,
+                username: newUser.username,
+                subscriptionId: newUser.subscriptionId,
+                plan: newUser.plan,
+                plan_status: newUser.plan_status,
+                startDate: newUser.startDate,
+                endDate: newUser.endDate,
+                email_verified: newUser.email_verified,
+                isAdmin: newUser.isAdmin
+            },
+            process.env.JWT_SECRET
+        )
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        });
+        
+        res.status(200).redirect("/");
     }catch(error){
         if(error.code === 11000){
             res.status(409).json({
