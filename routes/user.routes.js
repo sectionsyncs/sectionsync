@@ -10,6 +10,8 @@ const projectModel = require("../models/project.model");
 const category = require("../models/category.model");
 const section = require("../models/section.model");
 const razorpay = require("../config/razorpay");
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -307,5 +309,63 @@ router.post('/deactivate-plan',auth , async (req, res) => {
     }
 });
 
+//email varification routes
+router.post('/send-verification-email', async (req, res) => {
+    try {
+
+      const user = await userModel.findById(req.user.userID);
+  
+      const token = crypto.randomBytes(32).toString('hex');
+      user.email_verification_token = token;
+      await user.save();
+  
+      const verifyUrl = `https://sectionsync.com/user/verify-email?token=${token}`;
+  
+      const transporter = nodemailer.createTransport({
+        service: 'Gmail', // Or use Mailtrap/SMTP
+        auth: {
+            user: process.env.EMAIL_ID,   // Your Gmail
+            pass: process.env.EMAIL_APP_PASSWORD,     // App Password (Not your Gmail password)
+        }
+      });
+  
+      await transporter.sendMail({
+        from: `"Support" <${process.env.EMAIL_ID}>`,
+        to: user.email,
+        subject: 'Verify Your Email',
+        html: `
+          <p>Hello ${user.username},</p>
+          <p>Click below to verify your email:</p>
+          <a href="${verifyUrl}" target="_blank">Verify Email</a>
+        `
+      });
+  
+      res.redirect('/account');
+    } catch (error) {
+      console.error('Email send error:', error);
+      res.status(500).send('Failed to send verification email.');
+    }
+});
+
+router.get('/verify-email', async (req, res) => {
+    const { token } = req.query;
+  
+    try {
+      const user = await userModel.findOne({ email_verification_token: token });
+  
+      if (!user) return res.status(400).send('Invalid token');
+  
+      user.email_verified = true;
+      user.email_verification_token = undefined;
+      await user.save();
+  
+      res.redirect('/account');
+    } catch (error) {
+      res.status(500).send('Verification failed');
+    }
+});
+
 module.exports = router;
 // GET /user/logout
+
+

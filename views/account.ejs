@@ -30,7 +30,19 @@
         <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg">
           <h3 class="text-xl font-semibold mb-2">Profile Information</h3>
           <p><strong>Username:</strong> <%= user.username %></p>
-          <p><strong>Email:</strong> <%= user.email %></p>
+          <p><strong>Email:</strong> <%= user.email %>
+            <% if (!user.email_verified) { %>
+              <span class="text-red-600 ml-2 font-semibold">Not Verified</span>
+              <form action="/user/send-verification-email" method="POST" class="inline ml-4">
+                <button type="submit"
+                  class="text-blue-600 hover:text-blue-800 underline font-medium">
+                  Click to Verify
+                </button>
+              </form>
+            <% } else { %>
+              <span class="text-green-600 ml-2 font-semibold">Verified</span>
+            <% } %>
+          </p>
         </div>
 
         <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg">
