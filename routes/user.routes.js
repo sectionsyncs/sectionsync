@@ -389,14 +389,20 @@ router.get('/verify-email', async (req, res) => {
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });  
   
-    setTimeout(() => {
-        res.redirect('/user/account');
-    },2000)
+    res.redirect('/user/post-verify');
 
     } catch (error) {
       res.status(500).send('Verification failed', error);
     }
 });
+
+router.get('/post-verify', setUser, (req, res) => {
+    if (!req.user) {
+        return res.redirect('/user/login');
+    }
+    res.redirect('/user/account');
+});
+
 
 module.exports = router;
 // GET /user/logout
