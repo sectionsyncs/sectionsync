@@ -105,7 +105,7 @@ router.post("/login",
             })
         }
 
-        const token = jwt.sign({
+        const token = jwt.sign({ 
                 userID: user._id,
                 email: user.email,
                 username: user.username,
@@ -114,12 +114,18 @@ router.post("/login",
                 plan_status: user.plan_status,
                 startDate: user.startDate,
                 endDate: user.endDate,
+                email_verified: updateUser.email_verified,
                 isAdmin: user.isAdmin
             },
             process.env.JWT_SECRET
         )
 
-        res.cookie('token', token);
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        });
         res.status(200).redirect("/");
     }
 )
@@ -290,6 +296,7 @@ router.post('/deactivate-plan',auth , async (req, res) => {
           plan_status: updateUser.plan_status,
           startDate: updateUser.startDate,
           endDate: updateUser.endDate,
+          email_verified: updateUser.email_verified,
           isAdmin: updateUser.isAdmin
         },
         process.env.JWT_SECRET
@@ -359,6 +366,28 @@ router.get('/verify-email', async (req, res) => {
       user.email_verified = true;
       user.email_verification_token = '';
       await user.save();
+
+      const token = jwt.sign({
+        userID: user._id,
+        username: user.username,
+        email: user.email,
+        plan: user.plan,
+        plan_status: user.plan_status,
+        startDate: user.startDate,
+        endDate: user.endDate,
+        email_verified: updateUser.email_verified,
+        isAdmin: user.isAdmin
+      },
+      process.env.JWT_SECRET
+    );
+
+    // Send new cookie
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
   
       res.redirect('/user/account');
     } catch (error) {

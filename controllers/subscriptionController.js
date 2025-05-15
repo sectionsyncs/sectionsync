@@ -66,13 +66,14 @@ exports.handlePaymentSuccess = async (req, res) => {
         plan_status: updateUser.plan_status,
         startDate: updateUser.startDate,
         endDate: updateUser.endDate,
+        email_verified: updateUser.email_verified,
         isAdmin: updateUser.isAdmin
       },
       process.env.JWT_SECRET
     );
 
     // Send new cookie
-    res.cookie('token', token, {
+    res.cookie('token', token, { 
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
