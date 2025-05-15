@@ -114,7 +114,7 @@ router.post("/login",
                 plan_status: user.plan_status,
                 startDate: user.startDate,
                 endDate: user.endDate,
-                email_verified: updateUser.email_verified,
+                email_verified: user.email_verified,
                 isAdmin: user.isAdmin
             },
             process.env.JWT_SECRET
@@ -375,7 +375,7 @@ router.get('/verify-email', async (req, res) => {
         plan_status: user.plan_status,
         startDate: user.startDate,
         endDate: user.endDate,
-        email_verified: updateUser.email_verified,
+        email_verified: user.email_verified,
         isAdmin: user.isAdmin
       },
       process.env.JWT_SECRET
