@@ -326,7 +326,7 @@ router.post('/send-verification-email', auth, async (req, res) => {
       user.email_verification_token = token;
       await user.save();
   
-      const verifyUrl = `https://sectionsync.com/user/verify-email?token=${token}`;
+      const verifyUrl = `https://sectionsync.com/user/verify-email?email_token=${token}`;
   
       const transporter = nodemailer.createTransport({
         service: 'Gmail', // Or use Mailtrap/SMTP
