@@ -356,10 +356,10 @@ router.post('/send-verification-email', auth, async (req, res) => {
 });
 
 router.get('/verify-email', async (req, res) => {
-    const { token } = req.query;
+    const { email_token } = req.query;
   
     try {
-      const user = await userModel.findOne({ email_verification_token: token });
+      const user = await userModel.findOne({ email_verification_token: email_token });
   
       if (!user) return res.status(400).send('Invalid token');
   
@@ -383,11 +383,11 @@ router.get('/verify-email', async (req, res) => {
 
     // Send new cookie
     res.cookie('token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    });
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });  
   
       res.redirect('/user/account');
     } catch (error) {
