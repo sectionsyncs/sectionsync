@@ -11,6 +11,8 @@ const sectionRoutes = require('./api/sections');
 const subscriptionRoutes = require('./routes/subscription.routes');
 const sectioOpration = require('./api/section-opration');
 const contactRoutes = require('./routes/contact');
+const webhookRoutes = require('./routes/webhook');
+
 
 connectToDB();
 dotenv.config();
@@ -31,6 +33,7 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/sections', sectionRoutes);    
 app.use('/api/section-opration/', sectioOpration); 
 app.use('/contact', contactRoutes);
+app.use('/webhook', webhookRoutes);
 
 app.use((req, res, next) => {
     res.status(404).render('404');
