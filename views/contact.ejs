@@ -18,6 +18,14 @@
     <div class="w-full max-w-2xl bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
       <h2 class="text-3xl font-bold mb-6 text-center">Contact Us</h2>
 
+      <!-- Contact Details -->
+      <div class="mb-8 text-sm text-gray-700 dark:text-gray-300 space-y-2">
+        <p><strong>Email:</strong> <a href="mailto:sectionsync@gmail.com" class="text-blue-600 dark:text-blue-400 hover:underline">sectionsync@gmail.com</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+919602080564" class="text-blue-600 dark:text-blue-400 hover:underline">+91 9602080564</a></p>
+        <p><strong>Address:</strong> Shop 29, Jagdumba Duplex, Gori Vihar, Near Toll Plaza, Manoharpur, Jaipur 303104, Rajasthan, India</p>
+      </div>
+
+      <!-- Contact Form -->
       <form id="contactForm" class="space-y-6">
         <div>
           <label for="name" class="block text-sm font-medium mb-2">Name</label>
@@ -62,50 +70,50 @@
   <%- include('footer') %>
 
   <script>
-  const contactForm = document.getElementById('contactForm');
-  const successMessage = document.getElementById('successMessage');
-  const submitButton = document.getElementById('submitButton');
-  const loaderIcon = document.getElementById('loaderIcon');
-  const buttonText = document.getElementById('buttonText');
+    const contactForm = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+    const submitButton = document.getElementById('submitButton');
+    const loaderIcon = document.getElementById('loaderIcon');
+    const buttonText = document.getElementById('buttonText');
 
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-    loaderIcon.classList.remove('hidden');
-    buttonText.textContent = 'Sending...';
-    submitButton.disabled = true;
+      loaderIcon.classList.remove('hidden');
+      buttonText.textContent = 'Sending...';
+      submitButton.disabled = true;
 
-    const formData = {
-      name: contactForm.name.value,
-      email: contactForm.email.value,
-      message: contactForm.message.value
-    };
+      const formData = {
+        name: contactForm.name.value,
+        email: contactForm.email.value,
+        message: contactForm.message.value
+      };
 
-    try {
-      const response = await fetch('/contact/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
+      try {
+        const response = await fetch('/contact/send', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
 
-      if (response.ok) {
-        contactForm.reset();
-        successMessage.classList.remove('hidden');
-      } else {
+        if (response.ok) {
+          contactForm.reset();
+          successMessage.classList.remove('hidden');
+        } else {
+          alert('Something went wrong. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
         alert('Something went wrong. Please try again.');
+      } finally {
+        loaderIcon.classList.add('hidden');
+        buttonText.textContent = 'Send Message';
+        submitButton.disabled = false;
       }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Something went wrong. Please try again.');
-    } finally {
-      loaderIcon.classList.add('hidden');
-      buttonText.textContent = 'Send Message';
-      submitButton.disabled = false;
-    }
-  }); 
-</script>
+    });
+  </script>
 
 </body>
 
