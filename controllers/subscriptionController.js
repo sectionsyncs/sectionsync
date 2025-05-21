@@ -1,5 +1,6 @@
 const razorpay = require('../config/razorpay');
 const User = require('../models/user.model'); 
+const Subscription = require('../models/subscription.model');
 const jwt = require('jsonwebtoken');
 const dotenv = require("dotenv");
 dotenv.config();
@@ -16,6 +17,14 @@ exports.createSubscription = async (req, res) => {
       plan_id: planId,
       customer_notify: 1,
       total_count: planType === 'monthly' ? 12 : 1,
+    });
+
+    await Subscription.create({
+      userId: req.user.userID,
+      subscriptionId: subscription.id,
+      planType,
+      status: 'created',
+      createdAt: new Date(),
     });
 
     res.render('checkout', {
@@ -56,6 +65,11 @@ exports.handlePaymentSuccess = async (req, res) => {
     });
 
     console.log(updateUser);
+
+    await Subscription.findOneAndUpdate(
+      { subscriptionId: razorpay_subscription_id },
+      { status: 'active' }
+    );
 
     // Create new token with updated user info
     const token = jwt.sign({
