@@ -50,8 +50,9 @@
     const options = {
       key: "<%= razorpayKeyId %>",
       subscription_id: "<%= subscriptionId %>",
-      name: "Your Company Name",
+      name: "Creative Programmers",
       description: "Subscription Payment",
+      image: "https://lh3.googleusercontent.com/ogw/AF2bZyg1l5H1FC2yxIJPfVnhIPurhEI1Mf3GfdbPycDWYk2_1tE=s64-c-mo",
       handler: function (response) {
         fetch('/subscription/payment-success', {
           method: 'POST',
