@@ -41,8 +41,8 @@ app.use('/webhook', webhookRoutes);
 
 cron.schedule('*/10 * * * *', async () => {
   try {
-    //const res = await axios.post('https://www.sectionsync.com/api/cancel-unused-subscriptions');
-    const res = await axios.post('http://localhost:3000/api/cancel-unused-subscriptions');
+    const res = await axios.post('https://www.sectionsync.com/api/cancel-unused-subscriptions');
+    // const res = await axios.post('http://localhost:3000/api/cancel-unused-subscriptions');
     console.log('Cancelled stale subscriptions:', res.data);
   } catch (err) {
     console.error('Cron job failed:', err.message);
