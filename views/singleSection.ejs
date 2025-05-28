@@ -28,7 +28,11 @@
                 Add Section
             </button>
         </div>
-        <img src="<%= section.image %>" alt="<%= section.title %>" >
+        <% if (section.video == "") { %>
+            <img src="<%= section.image %>" alt="<%= section.title %>" >
+        <% } else { %>
+            <video src="<%= section.video %>"></video>
+        <% } %>
     </main>
       <!-- Tab Toggle Script -->
         <script>
