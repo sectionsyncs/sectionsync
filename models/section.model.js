@@ -14,6 +14,10 @@ const sectionSchema = new mongoose.Schema({
     type: String, // URL or file path
     required: true
   },
+  video: {
+    type: String, // URL or file video path
+    default: ''
+  },
   assets: [
     {
       key: { type: String, required: true },

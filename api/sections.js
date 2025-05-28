@@ -13,13 +13,14 @@ router.get('/', async(req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const { category, title, image, assets } = req.body;
+  const { category, title, image, video, assets } = req.body;
 
   try {
     const section = await Section.create({
       category,
       title,
       image,
+      video,
       assets
     });
     res.status(201).json(section);
