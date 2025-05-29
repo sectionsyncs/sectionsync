@@ -31,7 +31,7 @@
         <% if (section.video == "") { %>
             <img src="<%= section.image %>" alt="<%= section.title %>" >
         <% } else { %>
-            <video src="<%= section.video %>"></video>
+            <video src="<%= section.video %>" muted autoplay playsinline loop></video>
         <% } %>
     </main>
       <!-- Tab Toggle Script -->
