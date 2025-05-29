@@ -3,12 +3,12 @@
         <div class="md:flex md:justify-between">
           <div class="mb-6 md:mb-0 block dark:hidden">
               <a href="/" class="flex items-center">
-                <img src="./images/dark-logo.svg" alt="" style="width: 150px; height: max-content;">
+                <img src="/images/dark-logo.svg" alt="" style="width: 150px; height: max-content;">
               </a>
           </div>
           <div class="mb-6 md:mb-0 hidden dark:block">
             <a href="/" class="flex items-center">
-                <img src="./images/light-logo.svg" alt="" style="width: 150px; height: max-content;">
+                <img src="/images/light-logo.svg" alt="" style="width: 150px; height: max-content;">
             </a>
           </div>
           <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
@@ -88,3 +88,37 @@
       </div>
     </div>
 </footer>
+<div id="toast-container" class="fixed top-4 right-4 space-y-2" style="z-index: 9999;"></div>
+<script defer>
+  function showToast(type, message) {
+    const colors = {
+      success: 'bg-green-500',
+      error: 'bg-red-500',
+      warning: 'bg-yellow-500',
+    };
+
+    const icons = {
+      success: '✅',
+      error: '❌',
+      warning: '⚠️',
+    };
+
+    const toast = document.createElement('div');
+    toast.className = `
+      flex items-center text-white px-4 py-3 rounded shadow-md transition-opacity duration-300
+      ${colors[type] || 'bg-gray-800'}
+    `;
+    toast.innerHTML = `
+      <span class="mr-2 text-xl">${icons[type] || 'ℹ️'}</span>
+      <span>${message}</span>
+    `;
+
+    const container = document.getElementById('toast-container');
+    container.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add('opacity-0');
+      setTimeout(() => toast.remove(), 300); // wait for transition
+    }, 3000);
+  }
+</script>

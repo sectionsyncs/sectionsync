@@ -31,7 +31,7 @@
         <% if (section.video == "") { %>
             <img src="<%= section.image %>" alt="<%= section.title %>" >
         <% } else { %>
-            <video src="<%= section.video %>" muted autoplay playsinline loop></video>
+            <video src="<%= section.video %>" muted autoplay playsinline loop poster="<%= section.image %>"></video>
         <% } %>
     </main>
       <!-- Tab Toggle Script -->
@@ -48,8 +48,17 @@
                         sectionID: section
                     })
                 }).then(resposne => resposne.json())
-                .then(data => console.log(data))
-                .catch(error => { console.log(error) })
+                .then(data => {
+                    console.log(data)
+                    if(data.failedAssets){
+                        showToast('error', 'Error to sync section successful!');
+                    }else {
+                        showToast('success', 'Section Sync Successfully!');
+                    }
+                })
+                .catch(error => { 
+                    console.log(error) 
+                })
             }
         </script>
     <%- include ('footer') %>
