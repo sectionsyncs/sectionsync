@@ -42,7 +42,7 @@
         <!-- Username -->
         <div>
           <label for="username" class="block mb-2 text-sm font-medium">Username</label>
-          <input type="text" id="username" name="username" required
+          <input type="text" id="username" min="3" name="username" required
             class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-blue-500 focus:border-blue-500" 
             placeholder="Enter your username" />
         </div>
@@ -53,11 +53,20 @@
           <input type="password" id="password" name="password" required
             class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-blue-500 focus:border-blue-500" 
             placeholder="Enter your password" />
+
+          <!-- Password Requirements -->
+          <ul id="passwordRules" class="mt-3 space-y-1 text-sm text-gray-600 dark:text-gray-300">
+            <li id="rule-length" class="flex items-center gap-2"><span>❌</span> Minimum 8 characters</li>
+            <li id="rule-lower" class="flex items-center gap-2"><span>❌</span> At least one lowercase letter</li>
+            <li id="rule-upper" class="flex items-center gap-2"><span>❌</span> At least one uppercase letter</li>
+            <li id="rule-symbol" class="flex items-center gap-2"><span>❌</span> At least one symbol (@, #, etc.)</li>
+          </ul>
         </div>
+
 
         <!-- Buttons -->
         <div class="flex flex-col space-y-3">
-          <button type="submit"
+          <button type="submit" disabled
             class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-all">
             Login
           </button>
@@ -71,6 +80,64 @@
   </div>
 
   <%- include('footer') %>
+  <script>
+  const form = document.getElementById('loginForm');
+  const usernameInput = document.getElementById('username');
+  const passwordInput = document.getElementById('password');
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  // Password rules elements
+  const ruleLength = document.getElementById('rule-length');
+  const ruleLower = document.getElementById('rule-lower');
+  const ruleUpper = document.getElementById('rule-upper');
+  const ruleSymbol = document.getElementById('rule-symbol');
+
+  function updateRule(element, condition) {
+    if (condition) {
+      element.classList.remove('text-gray-600', 'dark:text-gray-300');
+      element.classList.add('text-green-600');
+      element.querySelector('span').textContent = '✅';
+    } else {
+      element.classList.add('text-gray-600', 'dark:text-gray-300');
+      element.classList.remove('text-green-600');
+      element.querySelector('span').textContent = '❌';
+    }
+  }
+
+  function validateForm() {
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value;
+
+    const isUsernameValid = username.length >= 3;
+
+    const hasLength = password.length >= 8;
+    const hasLowercase = /[a-z]/.test(password);
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    // Update rule UI
+    updateRule(ruleLength, hasLength);
+    updateRule(ruleLower, hasLowercase);
+    updateRule(ruleUpper, hasUppercase);
+    updateRule(ruleSymbol, hasSymbol);
+
+    const isPasswordValid = hasLength && hasLowercase && hasUppercase && hasSymbol;
+
+    if (isUsernameValid && isPasswordValid) {
+      submitBtn.disabled = false;
+      submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    } else {
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+    }
+  }
+
+  usernameInput.addEventListener('input', validateForm);
+  passwordInput.addEventListener('input', validateForm);
+
+  validateForm();
+</script>
+
 </body>
 
 </html>
