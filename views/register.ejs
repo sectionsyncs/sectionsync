@@ -45,6 +45,11 @@
           <input type="text" id="username" name="username" required
             class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-blue-500 focus:border-blue-500"
             placeholder="Enter your username" />
+
+          <!-- Username Requirement -->
+          <p id="usernameRule" class="mt-2 text-sm flex items-center gap-2 text-gray-600 dark:text-gray-300">
+            <span>❌</span> Minimum 3 characters
+          </p>
         </div>
 
         <!-- Email -->
@@ -61,6 +66,14 @@
           <input type="password" id="password" name="password" required
             class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-blue-500 focus:border-blue-500"
             placeholder="Create a strong password" />
+
+          <!-- Password Requirements -->
+          <ul id="passwordRules" class="mt-3 space-y-1 text-sm text-gray-600 dark:text-gray-300">
+            <li id="rule-length" class="flex items-center gap-2"><span>❌</span> Minimum 8 characters</li>
+            <li id="rule-lower" class="flex items-center gap-2"><span>❌</span> At least one lowercase letter</li>
+            <li id="rule-upper" class="flex items-center gap-2"><span>❌</span> At least one uppercase letter</li>
+            <li id="rule-symbol" class="flex items-center gap-2"><span>❌</span> At least one symbol (@, #, etc.)</li>
+          </ul>
         </div>
 
         <!-- Terms and Conditions -->
@@ -92,6 +105,84 @@
   </div>
 
   <%- include('footer') %>
+<script>
+  const form = document.getElementById('registerForm');
+  const usernameInput = document.getElementById('username');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const termsCheckbox = document.getElementById('terms');
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  // Username rule
+  const usernameRule = document.getElementById('usernameRule');
+
+  // Password rules
+  const ruleLength = document.getElementById('rule-length');
+  const ruleLower = document.getElementById('rule-lower');
+  const ruleUpper = document.getElementById('rule-upper');
+  const ruleSymbol = document.getElementById('rule-symbol');
+
+  function updateRule(element, isValid) {
+    if (isValid) {
+      element.classList.remove('text-gray-600', 'dark:text-gray-300');
+      element.classList.add('text-green-600');
+      element.querySelector('span').textContent = '✅';
+    } else {
+      element.classList.add('text-gray-600', 'dark:text-gray-300');
+      element.classList.remove('text-green-600');
+      element.querySelector('span').textContent = '❌';
+    }
+  }
+
+  function updateUsernameRule(isValid) {
+    if (isValid) {
+      usernameRule.classList.remove('text-gray-600', 'dark:text-gray-300');
+      usernameRule.classList.add('text-green-600');
+      usernameRule.querySelector('span').textContent = '✅';
+    } else {
+      usernameRule.classList.add('text-gray-600', 'dark:text-gray-300');
+      usernameRule.classList.remove('text-green-600');
+      usernameRule.querySelector('span').textContent = '❌';
+    }
+  }
+
+  function validateForm() {
+    const username = usernameInput.value.trim();
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+    const termsAccepted = termsCheckbox.checked;
+
+    const hasLength = password.length >= 8;
+    const hasLowercase = /[a-z]/.test(password);
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    const isPasswordValid = hasLength && hasLowercase && hasUppercase && hasSymbol;
+    const isUsernameValid = username.length >= 3;
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    updateUsernameRule(isUsernameValid);
+    updateRule(ruleLength, hasLength);
+    updateRule(ruleLower, hasLowercase);
+    updateRule(ruleUpper, hasUppercase);
+    updateRule(ruleSymbol, hasSymbol);
+
+    if (isUsernameValid && isEmailValid && isPasswordValid && termsAccepted) {
+      submitBtn.disabled = false;
+      submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    } else {
+      submitBtn.disabled = true;
+      submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+    }
+  }
+
+  usernameInput.addEventListener('input', validateForm);
+  emailInput.addEventListener('input', validateForm);
+  passwordInput.addEventListener('input', validateForm);
+  termsCheckbox.addEventListener('change', validateForm);
+
+  validateForm(); // Run once on load
+</script>
 </body>
 
 </html>
