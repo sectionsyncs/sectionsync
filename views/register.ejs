@@ -122,6 +122,40 @@
   const ruleUpper = document.getElementById('rule-upper');
   const ruleSymbol = document.getElementById('rule-symbol');
 
+  let usernameTimeout;
+
+  async function checkUsernameAvailability(username) {
+    const usernameRule = document.getElementById('usernameRule');
+
+    if (username.length < 3) {
+      updateUsernameRule(false);
+      return;
+    }
+
+    try {
+      const res = await fetch(`/user/check-username?username=${encodeURIComponent(username)}`);
+      const data = await res.json();
+
+      if (data.available) {
+        usernameRule.classList.remove('text-red-500');
+        usernameRule.classList.add('text-green-600');
+        usernameRule.querySelector('span').textContent = '✅';
+        usernameRule.innerHTML = '<span>✅</span> Username is available';
+      } else {
+        usernameRule.classList.remove('text-green-600');
+        usernameRule.classList.add('text-red-500');
+        usernameRule.querySelector('span').textContent = '❌';
+        usernameRule.innerHTML = '<span>❌</span> Username is already taken';
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      }
+    } catch (error) {
+      console.error('Username check failed:', error);
+    }
+  }
+
+  usernameInput.addEventListener('input', validateForm);
+
   function updateRule(element, isValid) {
     if (isValid) {
       element.classList.remove('text-gray-600', 'dark:text-gray-300');
@@ -180,6 +214,14 @@
   emailInput.addEventListener('input', validateForm);
   passwordInput.addEventListener('input', validateForm);
   termsCheckbox.addEventListener('change', validateForm);
+
+  usernameInput.addEventListener('input', () => {
+    validateForm();
+    clearTimeout(usernameTimeout);
+    usernameTimeout = setTimeout(() => {
+      checkUsernameAvailability(usernameInput.value.trim());
+    }, 500); // wait 500ms after user stops typing
+  });
 
   validateForm(); // Run once on load
 </script>

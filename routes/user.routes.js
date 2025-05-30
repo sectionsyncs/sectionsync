@@ -109,6 +109,7 @@ router.post("/login",
             });        
         }
 
+
         const { username, password } = req.body;
         const user = await userModel.findOne({
             username: username
@@ -156,6 +157,29 @@ router.post("/login",
 router.get("/logout", (req, res) => {
     res.clearCookie("token");
     res.redirect("/user/login");
+});
+
+
+// GET /user/check-username?username=somevalue
+router.get('/check-username', async (req, res) => {
+const { username } = req.query;
+
+  if (!username || username.length < 3) {
+    return res.status(400).json({ available: false, message: 'Invalid username' });
+  }
+
+  try {
+    const existingUser = await userModel.findOne({ username });
+
+    if (existingUser) {
+      return res.json({ available: false, message: 'Username is taken' });
+    } else {
+      return res.json({ available: true, message: 'Username is available' });
+    }
+  } catch (err) {
+    console.error('Error checking username:', err);
+    return res.status(500).json({ available: false, message: 'Server error' });
+  }
 });
 
 router.get("/account", setUser, async (req, res) => {
