@@ -3,67 +3,91 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terms and Conditions</title>
+
+  <title>Terms and Conditions | SectionSync</title>
+  <meta name="description" content="Read the terms and conditions of SectionSync before using our pre-built Shopify sections and subscription services. Stay informed about your rights and responsibilities." />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Terms and Conditions | SectionSync" />
+  <meta property="og:description" content="Understand the rules for using SectionSync's pre-built Shopify sections and subscription services." />
+  <meta property="og:url" content="https://sectionsync.com/terms-and-condition" />
+  <meta property="og:image" content="https://sectionsync.com/preview-image.png" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Terms and Conditions | SectionSync" />
+  <meta name="twitter:description" content="Review our Terms and Conditions before accessing SectionSync's Shopify section tools and features." />
+  <meta name="twitter:image" content="https://sectionsync.com/preview-image.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="https://sectionsync.com/favicon.svg" />
+
+  <!-- Styles and Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
   <script defer src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </head>
+
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
 
   <%- include('header', { user: user }) %>
 
-  <section class="max-w-5xl mx-auto px-4 py-16">
+  <main role="main" class="max-w-5xl mx-auto px-4 py-16">
     <h1 class="text-4xl font-bold mb-8 text-center">Terms and Conditions</h1>
 
-    <div class="space-y-8 text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+    <div class="space-y-8 text-gray-800 dark:text-gray-300 text-lg leading-relaxed">
       
-      <div>
-        <h2 class="text-2xl font-semibold mb-2">1. Introduction</h2>
+      <section aria-labelledby="intro">
+        <h2 id="intro" class="text-2xl font-semibold mb-2">1. Introduction</h2>
         <p>Welcome to <strong>SectionSync</strong>. By accessing our website and services, you agree to be bound by these Terms and Conditions. Please read them carefully.</p>
-      </div>
+      </section>
 
-      <div>
-        <h2 class="text-2xl font-semibold mb-2">2. Account Registration</h2>
+      <section aria-labelledby="registration">
+        <h2 id="registration" class="text-2xl font-semibold mb-2">2. Account Registration</h2>
         <p>You must create an account to use our services. You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account.</p>
-      </div>
+      </section>
 
-      <div>
-        <h2 class="text-2xl font-semibold mb-2">3. Subscription Plans</h2>
+      <section aria-labelledby="subscription">
+        <h2 id="subscription" class="text-2xl font-semibold mb-2">3. Subscription Plans</h2>
         <p>Access to our pre-built Shopify sections and tools requires an active subscription. By subscribing, you agree to our pricing and payment terms listed on our website.</p>
-      </div>
+      </section>
 
-      <div>
-        <h2 class="text-2xl font-semibold mb-2">4. Use of Services</h2>
+      <section aria-labelledby="usage">
+        <h2 id="usage" class="text-2xl font-semibold mb-2">4. Use of Services</h2>
         <p>You may use our sections only for your personal or commercial Shopify stores. Unauthorized use, redistribution, or resale of our sections is strictly prohibited.</p>
-      </div>
+      </section>
 
-      <div>
-        <h2 class="text-2xl font-semibold mb-2">5. Refund Policy</h2>
+      <section aria-labelledby="refund">
+        <h2 id="refund" class="text-2xl font-semibold mb-2">5. Refund Policy</h2>
         <p>All payments are non-refundable. Please review the features and demo sections before purchasing a subscription plan.</p>
-      </div>
+      </section>
 
-      <div>
-        <h2 class="text-2xl font-semibold mb-2">6. Intellectual Property</h2>
+      <section aria-labelledby="ip">
+        <h2 id="ip" class="text-2xl font-semibold mb-2">6. Intellectual Property</h2>
         <p>All content, including designs, templates, and code, remains the intellectual property of <strong>SectionSync</strong>. Unauthorized copying or distribution is prohibited.</p>
-      </div>
+      </section>
 
-      <div>
-        <h2 class="text-2xl font-semibold mb-2">7. Termination</h2>
+      <section aria-labelledby="termination">
+        <h2 id="termination" class="text-2xl font-semibold mb-2">7. Termination</h2>
         <p>We reserve the right to suspend or terminate your access to the services if you violate these Terms and Conditions or engage in any unlawful activities.</p>
-      </div>
+      </section>
 
-      <div>
-        <h2 class="text-2xl font-semibold mb-2">8. Changes to Terms</h2>
+      <section aria-labelledby="changes">
+        <h2 id="changes" class="text-2xl font-semibold mb-2">8. Changes to Terms</h2>
         <p>We may update these Terms and Conditions at any time. Changes will be effective immediately upon posting. Continued use of the services means you accept the changes.</p>
-      </div>
+      </section>
 
-      <div>
-        <h2 class="text-2xl font-semibold mb-2">9. Contact Us</h2>
-        <p>If you have any questions about these Terms and Conditions, please contact us at <a href="mailto:shopifysync@gmail.com" class="text-blue-600 hover:underline">shopifysync@gmail.com</a>.</p>
-      </div>
+      <section aria-labelledby="contact">
+        <h2 id="contact" class="text-2xl font-semibold mb-2">9. Contact Us</h2>
+        <p>If you have any questions about these Terms and Conditions, please contact us at 
+          <a href="mailto:shopifysync@gmail.com" class="text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500">shopifysync@gmail.com</a>.
+        </p>
+      </section>
 
     </div>
-  </section>
+  </main>
 
   <%- include('footer') %>
 

@@ -1,89 +1,198 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> <!-- Optional: remove `dark` if you want auto mode -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= project.store_name %></title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-    <script defer src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-    <link rel="stylesheet" href="/css/lightbox.min.css">
-    <script src="/js/lightbox-plus-jquery.min.js" defer></script>
-    <script src="/js/lightbox.min.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= project.store_name %> | SectionSync</title>
+  <meta name="description" content="Browse available sections and add them to the <%= project.store_name %> store project.">
+  <link rel="canonical" href="https://sectionsync.com/user/projects/<%= project.id %>">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="<%= project.store_name %> | SectionSync">
+  <meta property="og:description" content="Manage and add reusable Shopify sections to your <%= project.store_name %> project.">
+  <meta property="og:url" content="https://sectionsync.com/user/projects/<%= project.id %>">
+  <meta property="og:image" content="https://sectionsync.com/preview-image.png"> <!-- Replace with actual image -->
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= project.store_name %> | SectionSync">
+  <meta name="twitter:description" content="Explore reusable sections and integrate them into your Shopify store.">
+  <meta name="twitter:image" content="https://sectionsync.com/preview-image.png"> <!-- Replace with actual image -->
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="https://sectionsync.com/favicon.svg" />
+
+  <!-- Tailwind + Flowbite -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+  <script defer src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+  <!-- Lightbox -->
+  <link rel="stylesheet" href="/css/lightbox.min.css">
+  <script src="/js/lightbox-plus-jquery.min.js" defer></script>
+  <script src="/js/lightbox.min.js" defer></script>
 </head>
-<body>
-    <%-  include ('header', { user: user }) %>
-    <main class="p-4 max-w-screen-xl mx-auto">
-        <h1 class="text-2xl font-bold mb-6">Select Add Section to <%= project.store_name %></h1>
-    
-        <!-- Tabs -->
-        <div class="mb-6 border-b border-gray-300 dark:border-gray-700">
-          <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="sectionTabs">
-            <% categories.forEach((category, i) => { %>
-              <li class="mr-2">
-                <button 
-                  class="ss-tabs-title inline-block px-4 py-2 rounded-t-lg border-b-2 font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
-                  onclick="showTab('<%= category.name %>')" id="tab-<%= category.name %>">
-                  <%= category.name %> 
-                </button>
-              </li>
-            <% }) %> 
-          </ul>
+
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
+  <%- include('header', { user: user }) %>
+
+  <main class="p-4 max-w-screen-xl mx-auto">
+    <h1 class="text-2xl font-bold mb-6">Select Add Section to <%= project.store_name %></h1>
+
+    <!-- Tabs -->
+    <div class="mb-6 border-b border-gray-300 dark:border-gray-700">
+      <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="sectionTabs">
+        <% categories.forEach((category) => { %>
+          <li class="mr-2">
+            <button 
+              class="ss-tabs-title inline-block px-4 py-2 rounded-t-lg border-b-2 font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+              onclick="showTab('<%= category.name %>')" id="tab-<%= category.name %>">
+              <%= category.name %> 
+            </button>
+          </li>
+        <% }) %> 
+      </ul>
+    </div>
+
+    <!-- Section Grids -->
+    <% categories.forEach((cat, i) => { %>
+      <div id="content-<%= cat.name %>" class="tab-content ss-tab-content" style="<%= i === 0 ? '' : 'display:none' %>">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <% sections.forEach(section => { if (cat.id == section.category) { %>
+            <a href="/user/projects/<%= project.id %>/<%= section.id %>">
+              <div class="bg-white dark:bg-gray-800 rounded-xl shadow hover:shadow-lg transition duration-300"> 
+                <img src="<%= section.image %>" alt="<%= section.title %>" class="w-full h-40 rounded-t-xl object-contain">
+                <div class="p-4">
+                  <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                    <%= section.title %>
+                  </h2>
+                </div>
+              </div>
+            </a>
+          <% } }) %>
         </div>
-    
-        <!-- Section Grids -->
-        <% categories.forEach((cat, i) => { %>
-          <div id="content-<%= cat.name %>" class="tab-content ss-tab-content" style="<%= i === 0 ? '' : 'display:none' %>">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              <% sections.forEach(section => { if( cat.id == section.category ) { %>
-                <a href="/user/projects/<%= project.id %>/<%= section.id %>">
-                  <div class="bg-white dark:bg-gray-800 rounded-xl shadow hover:shadow-lg transition duration-300"> 
-                      <img src="<%= section.image %>" alt="<%= section.title %>" class="w-full h-40 rounded-t-xl" style="object-fit: contain;">
-                    <div class="p-4">
-                      <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                        <%= section.title %>
-                      </h2>
-                    </div>
-                  </div>
-                </a>
-              <% } }) %>
-            </div>
-          </div>
-        <% }) %>
-      </main>
-      <!-- Tab Toggle Script -->
-        <script>
-            function showTab(category) {
-              //console.log(category);
-              document.querySelectorAll('.ss-tab-content').forEach(content => {
-                  content.style.display = "none";
-              });
-              document.querySelectorAll('.ss-tabs-title').forEach(tab => {
-                  tab.classList.remove("border-blue-600", "text-blue-600", "dark:text-blue-400");
-              });
-            
-              document.getElementById(`content-${category}`).style.display = "block";
-              document.getElementById(`tab-${category}`).classList.add("border-blue-600", "text-blue-600", "dark:text-blue-400");
-            }
+      </div>
+    <% }) %>
+  </main>
 
-            async function add_section(store, section) {
-                //console.log(store, section);
-                fetch('/api/section-opration/add', {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        projectID: store,
-                        sectionID: section
-                    })
-                }).then(resposne => resposne.json())
-                .then(data => console.log(data))
-                .catch(error => { console.log(error) })
-            }
+  <script>
+    function showTab(category) {
+      document.querySelectorAll('.ss-tab-content').forEach(content => {
+        content.style.display = "none";
+      });
+      document.querySelectorAll('.ss-tabs-title').forEach(tab => {
+        tab.classList.remove("border-blue-600", "text-blue-600", "dark:text-blue-400");
+      });
 
+      document.getElementById(`content-${category}`).style.display = "block";
+      document.getElementById(`tab-${category}`).classList.add("border-blue-600", "text-blue-600", "dark:text-blue-400");
+    }
 
-        </script>
-    <%- include ('footer') %>
+    async function add_section(store, section) {
+      fetch('/api/section-opration/add', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          projectID: store,
+          sectionID: section
+        })
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
+    }
+  </script>
+
+  <%- include('footer') %>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en" class="dark"> <!-- Optional: remove `dark` if you want auto mode -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= project.store_name %> | SectionSync</title>
+  <meta name="description" content="Browse available sections and add them to the <%= project.store_name %> store project.">
+  <link rel="canonical" href="https://sectionsync.com/user/projects/<%= project.id %>">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="<%= project.store_name %> | SectionSync">
+  <meta property="og:description" content="Manage and add reusable Shopify sections to your <%= project.store_name %> project.">
+  <meta property="og:url" content="https://sectionsync.com/user/projects/<%= project.id %>">
+  <meta property="og:image" content="https://sectionsync.com/preview-image.png"> <!-- Replace with actual image -->
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= project.store_name %> | SectionSync">
+  <meta name="twitter:description" content="Explore reusable sections and integrate them into your Shopify store.">
+  <meta name="twitter:image" content="https://sectionsync.com/preview-image.png"> <!-- Replace with actual image -->
+
+  <!-- Tailwind + Flowbite -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+  <script defer src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
+  <%- include('header', { user: user }) %>
+
+  <main class="p-4 max-w-screen-xl mx-auto">
+    <h1 class="text-2xl font-bold mb-6">Select Add Section to <%= project.store_name %></h1>
+
+    <!-- Tabs -->
+    <div class="mb-6 border-b border-gray-300 dark:border-gray-700">
+      <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="sectionTabs">
+        <% categories.forEach((category) => { %>
+          <li class="mr-2">
+            <button 
+              class="ss-tabs-title inline-block px-4 py-2 rounded-t-lg border-b-2 font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+              onclick="showTab('<%= category.name %>')" id="tab-<%= category.name %>">
+              <%= category.name %> 
+            </button>
+          </li>
+        <% }) %> 
+      </ul>
+    </div>
+
+    <!-- Section Grids -->
+    <% categories.forEach((cat, i) => { %>
+      <div id="content-<%= cat.name %>" class="tab-content ss-tab-content" style="<%= i === 0 ? '' : 'display:none' %>">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <% sections.forEach(section => { if (cat.id == section.category) { %>
+            <a href="/user/projects/<%= project.id %>/<%= section.id %>">
+              <div class="bg-white dark:bg-gray-800 rounded-xl shadow hover:shadow-lg transition duration-300"> 
+                <img src="<%= section.image %>" alt="<%= section.title %>" class="w-full h-40 rounded-t-xl object-contain">
+                <div class="p-4">
+                  <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                    <%= section.title %>
+                  </h2>
+                </div>
+              </div>
+            </a>
+          <% } }) %>
+        </div>
+      </div>
+    <% }) %>
+  </main>
+
+  <script>
+    function showTab(category) {
+      document.querySelectorAll('.ss-tab-content').forEach(content => {
+        content.style.display = "none";
+      });
+      document.querySelectorAll('.ss-tabs-title').forEach(tab => {
+        tab.classList.remove("border-blue-600", "text-blue-600", "dark:text-blue-400");
+      });
+
+      document.getElementById(`content-${category}`).style.display = "block";
+      document.getElementById(`tab-${category}`).classList.add("border-blue-600", "text-blue-600", "dark:text-blue-400");
+    }
+  </script>
+
+  <%- include('footer') %>
 </body>
 </html>

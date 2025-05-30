@@ -1,18 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-    <script defer src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-    <script src="/js/globle.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Projects | SectionSync</title>
+  <meta name="description" content="View and manage all your Shopify projects connected to SectionSync.">
+  <link rel="canonical" href="https://sectionsync.com/user/projects">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Your Projects | SectionSync">
+  <meta property="og:description" content="View, edit, and manage your Shopify store projects securely on SectionSync.">
+  <meta property="og:url" content="https://sectionsync.com/user/projects">
+  <meta property="og:image" content="https://sectionsync.com/preview-image.png"> <!-- Replace with actual image -->
+  <meta property="og:site_name" content="SectionSync">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Your Projects | SectionSync">
+  <meta name="twitter:description" content="Securely manage your Shopify store integrations on SectionSync.">
+  <meta name="twitter:image" content="https://sectionsync.com/preview-image.png"> <!-- Replace with actual image -->
+  <meta name="twitter:site" content="@SectionSync">
+  <meta name="twitter:creator" content="@SectionSync">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="https://sectionsync.com/favicon.svg" />
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+  <script defer src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+  <script src="/js/globle.js" defer></script>
 </head>
 <body>
     <%-  include ('header', { user: user }) %>
     <main class="p-4 bg-gray-100 dark:bg-gray-800 h-screen w-screen">
         <div class="mx-auto max-w-screen-xl">
+          <div class="flex justify-between items-center mb-4">
+          <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Your Projects</h1>
+          <a href="/user/projects/new"
+            class="bg-blue-700 hover:bg-blue-800 text-white font-medium px-5 py-2.5 rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 transition">
+            + Add Project
+          </a>
+        </div>
             <% if(projects.length == 0) { %>
             <div class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
                 <div class="text-center">

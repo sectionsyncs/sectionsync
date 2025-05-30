@@ -4,52 +4,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact Us</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Contact Us | SectionSync</title>
+  <meta name="description" content="Get in touch with the SectionSync team for questions, support, or collaboration. We're here to help you with your Shopify section needs.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sectionsync.com/contact">
+
+  <!-- Open Graph (Facebook, LinkedIn, etc.) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contact Us | SectionSync">
+  <meta property="og:description" content="Reach out to SectionSync for help with your Shopify sections, features, or general inquiries. We're here to support you.">
+  <meta property="og:url" content="https://sectionsync.com/contact">
+  <meta property="og:image" content="https://sectionsync.com/preview-image.png"> <!-- Replace with actual image URL -->
+  <meta property="og:site_name" content="SectionSync">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact Us | SectionSync">
+  <meta name="twitter:description" content="Have questions or need support? Contact the SectionSync team today.">
+  <meta name="twitter:image" content="https://sectionsync.com/preview-image.png"> <!-- Replace with actual image URL -->
+  <meta name="twitter:site" content="@SectionSync"> <!-- Replace with your Twitter handle -->
+  <meta name="twitter:creator" content="@SectionSync"> <!-- Replace with your Twitter handle -->
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="https://sectionsync.com/favicon.svg" />
+
+  <!-- CSS & JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
   <script defer src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </head>
+
 
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
 
   <%- include('header', { user: user }) %>
 
-  <div class="min-h-screen flex items-center justify-center px-4 py-8">
-    <div class="w-full max-w-2xl bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
-      <h2 class="text-3xl font-bold mb-6 text-center">Contact Us</h2>
+  <main class="min-h-screen flex items-center justify-center px-4 py-12">
+    <div class="w-full max-w-3xl bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
+      <h1 class="text-3xl font-bold mb-6 text-center">Contact Us</h1>
 
       <!-- Contact Details -->
-      <div class="mb-8 text-sm text-gray-700 dark:text-gray-300 space-y-2">
-        <p><strong>Email:</strong> <a href="mailto:sectionsync@gmail.com" class="text-blue-600 dark:text-blue-400 hover:underline">sectionsync@gmail.com</a></p>
-        <p><strong>Phone:</strong> <a href="tel:+919602080564" class="text-blue-600 dark:text-blue-400 hover:underline">+91 9602080564</a></p>
-        <p><strong>Address:</strong> Shop 29, Jagdumba Duplex, Gori Vihar, Near Toll Plaza, Manoharpur, Jaipur 303104, Rajasthan, India</p>
-      </div>
+      <address class="mb-8 text-sm text-gray-700 dark:text-gray-300 space-y-2 not-italic">
+        <p><strong>Email:</strong> 
+          <a href="mailto:sectionsync@gmail.com" class="text-blue-600 dark:text-blue-400 hover:underline">sectionsync@gmail.com</a>
+        </p>
+        <p><strong>Phone:</strong> 
+          <a href="tel:+919602080564" class="text-blue-600 dark:text-blue-400 hover:underline">+91 9602080564</a>
+        </p>
+        <p><strong>Address:</strong> 
+          Shop 29, Jagdumba Duplex, Gori Vihar, Near Toll Plaza, Manoharpur, Jaipur 303104, Rajasthan, India
+        </p>
+      </address>
 
       <!-- Contact Form -->
-      <form id="contactForm" class="space-y-6">
+      <form id="contactForm" aria-label="Contact Form" class="space-y-6" novalidate>
         <div>
-          <label for="name" class="block text-sm font-medium mb-2">Name</label>
+          <label for="name" class="block text-sm font-medium mb-2">Name <span class="text-red-500">*</span></label>
           <input type="text" id="name" name="name" required
-            class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:ring-blue-500 focus:border-blue-500">
+            class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:ring-blue-500 focus:border-blue-500"
+            aria-required="true" aria-label="Your full name">
         </div>
 
         <div>
-          <label for="email" class="block text-sm font-medium mb-2">Email</label>
+          <label for="email" class="block text-sm font-medium mb-2">Email <span class="text-red-500">*</span></label>
           <input type="email" id="email" name="email" required
-            class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:ring-blue-500 focus:border-blue-500">
+            class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:ring-blue-500 focus:border-blue-500"
+            aria-required="true" aria-label="Your email address">
         </div>
 
         <div>
-          <label for="message" class="block text-sm font-medium mb-2">Message</label>
+          <label for="message" class="block text-sm font-medium mb-2">Message <span class="text-red-500">*</span></label>
           <textarea id="message" name="message" rows="5" required
-            class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:ring-blue-500 focus:border-blue-500"></textarea>
+            class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:ring-blue-500 focus:border-blue-500"
+            aria-required="true" aria-label="Your message or inquiry"></textarea>
         </div>
 
         <button type="submit"
           id="submitButton"
-          class="w-full flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition">
+          class="w-full flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition"
+          aria-label="Send your message">
           <svg id="loaderIcon" class="hidden w-5 h-5 mr-2 text-white animate-spin" fill="none" stroke="currentColor"
-            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="status" aria-hidden="true">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor"
               d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z">
@@ -60,12 +95,11 @@
       </form>
 
       <!-- Success Message -->
-      <div id="successMessage" class="hidden mt-6 text-green-600 text-center font-semibold">
+      <div id="successMessage" class="hidden mt-6 text-green-600 text-center font-semibold" role="alert">
         Thank you! Your message has been sent successfully.
       </div>
-
     </div>
-  </div>
+  </main>
 
   <%- include('footer') %>
 
@@ -84,9 +118,9 @@
       submitButton.disabled = true;
 
       const formData = {
-        name: contactForm.name.value,
-        email: contactForm.email.value,
-        message: contactForm.message.value
+        name: contactForm.name.value.trim(),
+        email: contactForm.email.value.trim(),
+        message: contactForm.message.value.trim()
       };
 
       try {
@@ -106,7 +140,7 @@
         }
       } catch (error) {
         console.error('Error:', error);
-        alert('Something went wrong. Please try again.');
+          alert('Something went wrong. Please try again.');
       } finally {
         loaderIcon.classList.add('hidden');
         buttonText.textContent = 'Send Message';
