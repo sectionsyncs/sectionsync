@@ -97,6 +97,10 @@ router.get("/login", setUser,
         }
     });
 
+router.get("/error", async(req, res) => {
+    res.render("user-error");
+})
+
 router.post("/login", 
     body("username").trim().isLength({ min: 3 }),
     body("password").trim().isStrongPassword().isLength({ min: 5 }),
@@ -116,17 +120,13 @@ router.post("/login",
         })
 
         if(!user) {
-            return res.status(400).json({
-                message: "username and password is incorrect"
-            })
+            return res.redirect('/user/error');
         }
 
         const isMatch = await bycript.compare(password, user.password);
 
         if(!isMatch) {
-            return res.status(400).json({
-                message: "username and password is incorrect"
-            })
+            return res.redirect('/user/error');
         }
 
         const token = jwt.sign({ 
