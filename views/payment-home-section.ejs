@@ -1,0 +1,53 @@
+
+      <section class="min-h-screen flex items-center justify-center px-4 py-12 bg-gray-100 dark:bg-gray-900">
+        <div class="max-w-4xl w-full bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-10">
+          <h1 class="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">Choose Your Plan</h1>
+      
+          <form action="/subscription/create-subscription" method="POST">
+            <div class="grid md:grid-cols-2 gap-8 mb-10">
+              <!-- Monthly Plan -->
+              <label for="monthly" class="relative block bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-xl p-8 cursor-pointer hover:border-blue-500 peer-checked:border-blue-600 transition-all">
+                <input type="radio" id="monthly" name="planType" value="monthly" class="sr-only peer" checked />
+                <div class="flex flex-col items-center text-center space-y-2">
+                  <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Monthly</h2>
+                  <p class="text-3xl font-bold text-blue-600 dark:text-blue-400">₹499</p>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">per month</p>
+                </div>
+                <div class="absolute top-4 right-4 hidden peer-checked:block">
+                  <span class="text-xs bg-blue-600 text-white rounded-full px-3 py-1">Selected</span>
+                </div>
+              </label>
+       
+              <!-- Yearly Plan -->
+              <label for="yearly" class="relative block bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-xl p-8 cursor-pointer hover:border-blue-500 peer-checked:border-blue-600 transition-all">
+                <input type="radio" id="yearly" name="planType" value="yearly" class="sr-only peer" <% if (user?.plan  == 'yearly') { %>checked<% } %> />
+                <div class="flex flex-col items-center text-center space-y-2">
+                  <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Yearly</h2>
+                  <p class="text-3xl font-bold text-blue-600 dark:text-blue-400">₹4800</p>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">billed yearly</p>
+                  <span class="mt-2 text-xs bg-green-100 text-green-600 dark:bg-green-700 dark:text-green-100 rounded-full px-3 py-1">
+                    Save 20%
+                  </span>
+                </div>
+                <div class="absolute top-4 right-4 hidden peer-checked:block">
+                  <span class="text-xs bg-blue-600 text-white rounded-full px-3 py-1">Selected</span>
+                </div>
+              </label>
+            </div>
+            
+            <% if(user) { %>
+              <% if (user.plan_status == 'active') { %>
+              <% } else { %>
+                <button type="submit"
+                  class="cursor-pointer w-full py-4 text-lg font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all">
+                  Subscribe Now
+                </button>
+              <% } %>
+            <% } else { %>
+              <a href="/user/login" class="cursor-pointer w-full py-4 text-lg font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all" style="display: block; width: max-content; margin: auto; padding-inline: 35px;">
+                Login to Subscribe
+              </a>
+            <% } %>
+          </form>
+        </div>
+      </section>

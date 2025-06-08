@@ -246,9 +246,11 @@ router.get("/projects/:id", auth, async (req, res) => {
 
         const user = await userModel.findById(req.user.userID);
 
-        if(Date.now() > new Date(user.endDate).getTime()) {
-            return res.redirect('/subscription/select-plan');
-        }
+        // if(Date.now() > new Date(user.endDate).getTime()) {
+        //     return res.redirect('/subscription/select-plan');
+        // } 
+
+        //Refirect in Subscription
 
 
         res.render('singleProject', {
